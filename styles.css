@@ -1,0 +1,22 @@
+/* CSS RESET */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+* {
+    margin: 0;
+    padding: 0;
+  }
+
+html, body {
+    height: 100%;
+  }
+
+
+  /* DESKTOP LAYOUT */
+
+  @media only screen and (min-width: 768px) {
+
+  }
+
