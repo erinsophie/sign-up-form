@@ -28,6 +28,7 @@
     html, body {
         height: 100%;
         position: relative;
+        overflow: auto;
       }
     
 
@@ -77,7 +78,7 @@
     }
 
 
-    /* FORM SIDE */
+    /* FORM ELEMENTS */
 
 
     .form-container {
@@ -87,34 +88,33 @@
     }
 
     .form-header {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
         color: #ffffff;
         width: 700px;
         margin: auto;
         margin-top: 50px;
-        margin-bottom: 50px;
+        padding-left: 10px;
     }
 
     .my-form {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         flex-wrap: wrap;
         max-width: 700px;
         margin: auto;
+        margin-top: 30px;
     }
 
    .input-container {
       display: flex;
       flex-direction: column;
-      padding: 10px;
-      margin-bottom: 16px;
    }
 
    input {
     height: 35px;
     color: var(--grey);
-    padding-left: 10px;
     border: 1px solid var(--grey);
+    padding-left: 10px;
     border-radius: 5px;
     background-color: transparent;
    }
@@ -126,7 +126,7 @@
    .my-form label {
     color: #ffffff;
     padding-bottom: 10px;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
    .email, .password, .password-confirm {
@@ -134,8 +134,14 @@
   }
 
   .name {
-    min-width: 50%;
+    width: 48%;
   }
+
+
+
+
+  /* BUTTON */
+
 
   .create-account-btn {
     width: 100%;
@@ -148,7 +154,7 @@
 
   .btn-container {
     width: 100%;
-    padding: 10px;
+    margin-top: 10px;
   }
 
   .create-account-btn:hover {
@@ -157,8 +163,19 @@
       border: 1px solid #ffffff;
   }
 
+
+  /*VALIDATION*/
+
+
   #password, #password-confirm {
     font-size: 1.3rem;
+  }
+
+  .input-container :last-child {
+    margin-top: 5px;
+    padding-left: 5px;
+    height: 40px;
+    max-height: 40px;
   }
 
   .valid {
