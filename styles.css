@@ -1,5 +1,9 @@
 /* CSS RESET */
 
+:root {
+    --blue: #0045A9;
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
   }
@@ -7,66 +11,122 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Urbanist', sans-serif;
   }
 
-html, body {
-    height: 100%;
-  }
 
 /* MOBILE LAYOUT */
-
-img {
-    width: 500px;
-    height: auto;
-}
-
-main {
-    display: flex;
-    width: 100%;
-    height: 100%;
-}
-
-.title {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    font-size: 1.6rem;
-}
-
-img {
-    padding-top: 40px;
-}
-
 
 
   /* DESKTOP LAYOUT */
 
   @media only screen and (min-width: 768px) {
 
-    .title {
-        position: absolute;
-        top: 15px;
-        left: 15px;
-        font-size: 1.8rem;
+    html, body {
+        height: 100%;
+        position: relative;
+      }
+    
+
+    main {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 100%;
     }
+
+    /* LEFT HAND HERO SIDE*/
 
     .img-container {
         position: relative;
-        border: 1px solid red;
         width: 40%;
         height: 100%;
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
+        overflow: hidden;
     }
 
     img {
-        width: 500px;
+        max-width: 500px;
         height: auto;
         padding-top: 0;
-        border: 1px solid red;
+        width: calc(90%);
     }
 
+    .title {
+        color: var(--blue);
+        position: absolute;
+        top: 20px;
+        left: 18px;
+        font-size: 1.8rem;
+    }
+
+    .link {
+        position: absolute;
+        bottom: 0;
+        padding-bottom: 20px;
+    }
+
+    .link a {
+        text-decoration: none;
+        color: var(--blue);
+    }
+
+
+    /* FORM SIDE */
+
+
+    .form-container {
+        width: 60%;
+        height: 100%;
+        background-color: var(--blue);
+    }
+
+    .form-header {
+        font-size: 2.5rem;
+        color: #ffffff;
+        width: 700px;
+        margin: auto;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .my-form {
+        border: 1px solid red;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        max-width: 700px;
+        margin: auto;
+    }
+
+   .input-container {
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      border: 1px solid red;
+      margin-bottom: 20px;
+   }
+
+   input {
+    height: 30px;
+   }
+
+   .my-form label {
+    color: #FAFAFA;
+    padding-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+   .email, .password, .password-confirm {
+       min-width: 100%;
   }
+
+  .name {
+    min-width: 50%;
+  }
+
+
+}
 
