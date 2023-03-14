@@ -2,6 +2,7 @@
 
 :root {
     --blue: #0045A9;
+    --grey: #C6C6C6;
 }
 
 *, *::before, *::after {
@@ -93,7 +94,6 @@
     }
 
     .my-form {
-        border: 1px solid red;
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
@@ -105,16 +105,23 @@
       display: flex;
       flex-direction: column;
       padding: 10px;
-      border: 1px solid red;
       margin-bottom: 20px;
    }
 
    input {
     height: 30px;
+    border-radius: 5px;
+    border: 1px solid var(--grey);
+    background-color: transparent;
+   }
+
+   ::placeholder {
+    padding-left: 10px;
+    color: var(--grey);
    }
 
    .my-form label {
-    color: #FAFAFA;
+    color: #ffffff;
     padding-bottom: 10px;
     font-size: 1.2rem;
 }
