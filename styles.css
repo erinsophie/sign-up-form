@@ -20,10 +20,31 @@
 
 /* MOBILE LAYOUT */
 
+.form-container {
+  width: 100%;
+  background-color: var(--blue);
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.img-container {
+  position: relative;
+}
+
+.title {
+   position: absolute;
+   color: var(--blue);
+   margin-bottom: 50px;
+}
+
+
 
   /* DESKTOP LAYOUT */
 
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: 700px) {
 
     html, body {
         height: 100%;
@@ -35,26 +56,28 @@
     main {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
         width: 100%;
-        height: 100%;
+        height: 100%
     }
 
     /* LEFT HAND HERO SIDE*/
 
     .img-container {
         position: relative;
-        width: 40%;
+        min-width: 40%;
         height: 100%;
         display: flex;
+        flex-wrap: wrap; 
         justify-content: center;
         align-items: center;
         overflow: hidden;
     }
 
     img {
+        width: 500px;
         max-width: 500px;
         height: auto;
-        padding-top: 0;
         width: calc(90%);
     }
 
@@ -63,7 +86,7 @@
         position: absolute;
         top: 20px;
         left: 18px;
-        font-size: 1.8rem;
+        font-size: 1.9rem;
     }
 
     .link {
@@ -195,7 +218,6 @@
   box-shadow: none;
   border: 1px solid var(--invalid);
 }
-
 
 }
 
