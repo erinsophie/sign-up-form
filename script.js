@@ -8,7 +8,9 @@ const emailInput = document.querySelector('#email')
 const submitBtn = document.querySelector('.create-account-btn')
 const nameMsg = document.querySelectorAll('.name-msg')
 const firstNameInput = document.querySelector('#first-name')
+const firstNameMsg = document.querySelector('.first-name-msg')
 const lastNameInput = document.querySelector('#last-name')
+const lastNameMsg = document.querySelector('.last-name-msg')
 const allInputs = document.querySelectorAll('input')
 
 
@@ -16,11 +18,24 @@ let feedback = false
 
 passwordInput.addEventListener('blur', validationMsg)
 passwordInput.addEventListener('input', aggressiveFeedback)
-passwordInput.addEventListener('blur', checkStatus)
+passwordInput.addEventListener('input', checkStatus)
+
 confirmInput.addEventListener('input', matchPasswords)
+confirmInput.addEventListener('input', checkStatus)
+
 emailInput.addEventListener('blur', validateEmail)
 emailInput.addEventListener('input', aggressiveFeedback)
-emailInput.addEventListener('blur', checkStatus)
+emailInput.addEventListener('input', checkStatus)
+
+firstNameInput.addEventListener('blur', validateName)
+firstNameInput.addEventListener('input', aggressiveFeedback)
+firstNameInput.addEventListener('input', checkStatus)
+
+lastNameInput.addEventListener('blur', validateName)
+lastNameInput.addEventListener('input', aggressiveFeedback)
+lastNameInput.addEventListener('input', checkStatus)
+
+
 submitBtn.addEventListener('click', validateForm)
 
 
@@ -32,7 +47,7 @@ function matchPasswords() {
         confirmMsg.classList.add("valid");
         confirmMsg.classList.remove("invalid")
     } else {
-        confirmMsg.textContent = "Passwords do not match*"
+        confirmMsg.textContent = "Passwords do not match"
         confirmMsg.classList.add("invalid");
         confirmMsg.classList.remove("valid");
     }
@@ -82,6 +97,20 @@ function validateEmail() {
     }
 }
 
+// REQUIRE NAME FIELDS 
+
+function validateName(e) {
+    if(e.target.value !== '' && e.target.id === 'first-name') {
+        feedback = true
+        firstNameMsg.textContent = "✓"
+        firstNameMsg.classList.add("valid")
+    } else if (e.target.value !== '' && e.target.id === 'last-name') {
+        feedback = true
+        lastNameMsg.textContent = "✓"
+        lastNameMsg.classList.add("valid")
+    }
+}
+
 // DISPLAY RED BORDER ON EMPTY FIELDS WHEN BUTTON IS CLICKED
 
 function validateForm() {
@@ -108,8 +137,11 @@ function aggressiveFeedback() {
         validationMsg()
      } else if (feedback && emailInput.value !== '') {
         validateEmail()
+     } else if (feedback && firstNameInput.value !== '') {
+        validateName()
      }
 }
+
 
 
 
