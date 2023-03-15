@@ -186,6 +186,15 @@
     color: var(--invalid)
   }
   
+ .required-border {
+  border: 1px solid var(--invalid);
+}
+
+.required-border:focus {
+  outline: none;
+  box-shadow: none;
+  border: 1px solid var(--invalid);
+}
 
 
 }
