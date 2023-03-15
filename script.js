@@ -16,6 +16,7 @@ const allInputs = document.querySelectorAll('input')
 
 let feedback = false 
 
+
 passwordInput.addEventListener('blur', validationMsg)
 passwordInput.addEventListener('input', aggressiveFeedback)
 passwordInput.addEventListener('input', checkStatus)
@@ -117,9 +118,16 @@ function validateForm() {
     for(let i = 0; i < allInputs.length; i++) {
         if(allInputs[i].value === '') {
             allInputs[i].classList.add('required-border')
+            allInputs[i].addEventListener('input', removeClass)
         }
     }
 }
+
+function removeClass() {
+    this.classList.remove('required-border')
+}
+
+
 
 // CLEAR MESSAGE WHEN FIELD IS BLANK AND USER CLICKS OUT OF IT
 
@@ -141,6 +149,7 @@ function aggressiveFeedback() {
         validateName()
      }
 }
+
 
 
 
