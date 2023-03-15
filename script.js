@@ -50,14 +50,12 @@ function validatePassword(password) {
 
 
 function validationMsg() {
-    let input = passwordInput.value
-    if (validatePassword(input)) {
+    if (validatePassword(passwordInput.value)) {
         feedback = true
         passwordMsg.textContent = "✓"
         passwordMsg.classList.add("valid")
         passwordMsg.classList.remove("invalid")
-    }
-    else if (input.value !== '' && !validatePassword(input)) {
+    } else if (passwordInput.value !== '' && !validatePassword(passwordInput.value)) {
         feedback = true
         passwordMsg.textContent = 
         "Password must be atleast 8 characters long, contain 1 uppercase letter, 1 number and 1 special character"
@@ -84,7 +82,7 @@ function validateEmail() {
     }
 }
 
-// DISPLAY REQUIRED MESSAGE BELOW EMPTY FIELDS WHEN BUTTON IS CLICKED
+// DISPLAY RED BORDER ON EMPTY FIELDS WHEN BUTTON IS CLICKED
 
 function validateForm() {
     for(let i = 0; i < allInputs.length; i++) {
