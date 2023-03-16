@@ -34,6 +34,7 @@ lastNameInput.addEventListener('input', checkStatus)
 
 
 submitBtn.addEventListener('click', validateForm)
+submitBtn.addEventListener('click', shake)
 
 
 //CONFIRM IF PASSWORDS MATCH
@@ -104,22 +105,40 @@ function validateName(e) {
 
 // DISPLAY RED BORDER ON EMPTY FIELDS WHEN BUTTON IS CLICKED
 
-function validateForm() {
+function validateForm(event) {
+    event.preventDefault()
     for(let i = 0; i < allInputs.length; i++) {
         if(allInputs[i].value === '') {
             allInputs[i].classList.add('required-border')
             allInputs[i].addEventListener('input', removeClass)
-            }
         }
     }
+  }
 
-    function removeClass() {
-        this.classList.remove('required-border')
+
+// REMOVE RED BORDER WHEN USER CLICKS INTO FIELD
+
+  function removeClass() {
+    this.classList.remove('required-border');
 }
 
 
+// SHAKE REQUIRED FIELDS WHEN EMPTY
 
-// CLEAR MESSAGE WHEN FIELD IS BLANK AND USER CLICKS OUT OF IT
+function shake(event) {
+    event.preventDefault();
+    allInputs.forEach(input => {
+        if(input.classList.contains('required-border')) {
+            input.classList.add('shake')
+        }
+        setTimeout(() => {
+            input.classList.remove('shake');
+          }, 600);
+    })
+}
+
+
+// DO NOT DISPLAY MESSAGE WHEN FIELD IS BLANK AND USER CLICKS OUT OF IT
 
 function checkStatus(e) {
     if(e.target.value === '') {
@@ -128,7 +147,7 @@ function checkStatus(e) {
     }
 }
 
-// UPDATE MSG ONLY WHEN USER CLICKS AWAY BUT WHEN USER CLICKS BACK INTO FIELD, UPDATE IN REAL TIME
+// DISPLAY MESSAGE ONLY WHEN USER CLICKS AWAY FROM FILLED FIELD BUT WHEN USER CLICKS BACK INTO FIELD, UPDATE IN REAL TIME
 
 function aggressiveFeedback() {
     const input = this;
@@ -147,5 +166,7 @@ function aggressiveFeedback() {
         }
     }
 }
+
+
 
 
