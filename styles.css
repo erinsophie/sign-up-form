@@ -66,8 +66,9 @@ img {
 }
 
 .form-container {
-  padding-top: 40px;
+  padding-top: 60px;
   background-color: var(--blue);
+  padding-bottom: 50px;
 }
 
 .form-header {
@@ -83,6 +84,8 @@ img {
   flex-direction: column;
   width: 400px;
   margin: auto;
+  margin-top: 50px;
+
 }
 
 .input-container {
@@ -123,7 +126,7 @@ background-color: transparent;
   padding: 15px;
   color: var(--blue);
   border-radius: 5px;
-  border: none;
+  border: 1px solid #ffffff;
   margin-bottom: 15px;
 }
 
@@ -172,6 +175,10 @@ outline: none;
 box-shadow: none;
 border: 1px solid var(--invalid);
 }
+
+
+
+
 
 
 
@@ -243,9 +250,12 @@ border: 1px solid var(--invalid);
     }
 
     .link a {
-        text-decoration: none;
-        color: var(--blue);
+       color: var(--blue);
+       text-decoration: none;    
     }
+
+   
+  
 
 
     /* FORM ELEMENTS */
@@ -256,6 +266,7 @@ border: 1px solid var(--invalid);
         height: 100%;
         background-color: var(--blue);
         padding-top: 0;
+        padding-bottom: 0;
     }
 
     .form-header {
@@ -322,7 +333,7 @@ border: 1px solid var(--invalid);
     padding: 15px;
     color: var(--blue);
     border-radius: 5px;
-    border: none;
+    border: 1px solid #ffffff;
     margin-bottom: 15px;
   }
 

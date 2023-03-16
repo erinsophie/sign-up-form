@@ -6,7 +6,6 @@ const passwordMsg = document.querySelector('.password-msg')
 const emailMsg = document.querySelector('.email-msg')
 const emailInput = document.querySelector('#email')
 const submitBtn = document.querySelector('.create-account-btn')
-const nameMsg = document.querySelectorAll('.name-msg')
 const firstNameInput = document.querySelector('#first-name')
 const firstNameMsg = document.querySelector('.first-name-msg')
 const lastNameInput = document.querySelector('#last-name')
@@ -63,14 +62,11 @@ function validatePassword(password) {
 
 
 function validationMsg() {
-    let feedback = false 
     if (validatePassword(passwordInput.value)) {
-        feedback = true
         passwordMsg.textContent = "✓"
         passwordMsg.classList.add("valid")
         passwordMsg.classList.remove("invalid")
     } else if (passwordInput.value !== '' && !validatePassword(passwordInput.value)) {
-        feedback = true
         passwordMsg.textContent = 
         "Password must be atleast 8 characters long, contain 1 uppercase letter, 1 number and 1 special character"
         passwordMsg.classList.add("invalid")
@@ -81,16 +77,13 @@ function validationMsg() {
 // EMAIL FEEDBACK
 
 function validateEmail() {
-    let feedback = false 
     let validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
     if (validEmail.test(emailInput.value)) {
-        feedback = true
         emailMsg.textContent = "✓"
         emailMsg.classList.add("valid")
         emailMsg.classList.remove("invalid")
     } else if (emailInput.value !== '' && !validEmail.test(emailInput.value)) {
-        feedback = true
         emailMsg.textContent = "Please enter a valid email address"
         emailMsg.classList.add("invalid")
         emailMsg.classList.remove("valid")
@@ -99,14 +92,11 @@ function validateEmail() {
 
 // REQUIRE NAME FIELDS 
 
-function validateName(e) {
-    let feedback = false 
+function validateName(e) {                
     if(e.target.value !== '' && e.target.id === 'first-name') {
-        feedback = true
         firstNameMsg.textContent = "✓"
         firstNameMsg.classList.add("valid")
     } else if (e.target.value !== '' && e.target.id === 'last-name') {
-        feedback = true
         lastNameMsg.textContent = "✓"
         lastNameMsg.classList.add("valid")
     }
@@ -129,7 +119,6 @@ function validateForm() {
 
 
 
-
 // CLEAR MESSAGE WHEN FIELD IS BLANK AND USER CLICKS OUT OF IT
 
 function checkStatus(e) {
@@ -142,13 +131,21 @@ function checkStatus(e) {
 // UPDATE MSG ONLY WHEN USER CLICKS AWAY BUT WHEN USER CLICKS BACK INTO FIELD, UPDATE IN REAL TIME
 
 function aggressiveFeedback() {
-    if(feedback && passwordInput.value !== '') {
-        validationMsg()
-     } else if (feedback && emailInput.value !== '') {
-        validateEmail()
-     } else if (feedback && firstNameInput.value !== '' ||feedback && lastNameInput.value !== '') {
-        validateName()
-     }
+    const input = this;
+    const inputId = input.getAttribute('id');
+    const msg = document.querySelector(`.${inputId}-msg`);
+    const feedback = msg.classList.contains('valid') || msg.classList.contains('invalid');
+    console.log(feedback)
+
+    if (feedback) {
+        if (inputId === 'password' && feedback) {
+            validationMsg();
+        } else if (inputId === 'email' && feedback) {
+            validateEmail();
+        } else if ((inputId === 'first-name' || inputId === 'last-name') && feedback) {
+            validateName();
+        }
+    }
 }
 
 
