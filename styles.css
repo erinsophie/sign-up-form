@@ -17,12 +17,72 @@
     font-family: 'Urbanist', sans-serif;
   }
 
+  html, body {
+    height: 100%;
+    position: relative;
+    overflow: auto;
+  }
+
+
 
 /* MOBILE LAYOUT */
 
-.form-container {
+.title {
+  color: var(--blue);
+  position: absolute;
+  top: 20px;
+  left: 18px;
+  font-size: 1.9rem;
+}
+
+.img-container {
+  position: relative;
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30px;
+}
+
+img {
+  width: 500px;
+  max-width: 500px;
+  height: auto;
+  width: calc(90%);
+  padding-top: 50px;
+  padding-bottom: 40px;
+}
+
+.link {
+  position: absolute;
+  bottom: 40px;
+}
+
+.link a {
+  text-decoration: none;
+  color: var(--blue);
+}
+
+.form-container {
+  padding-top: 40px;
   background-color: var(--blue);
+}
+
+.form-header {
+  font-size: 2rem;
+  color: #ffffff;
+  width: 400px;
+  margin: auto;
+  text-align: center;
+}
+
+.my-form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin: auto;
 }
 
 .input-container {
@@ -30,27 +90,113 @@
   flex-direction: column;
 }
 
-.img-container {
-  position: relative;
+input {
+height: 35px;
+color: var(--grey);
+border: 1px solid var(--grey);
+padding-left: 10px;
+border-radius: 5px;
+background-color: transparent;
 }
 
-.title {
-   position: absolute;
-   color: var(--blue);
-   margin-bottom: 50px;
+::placeholder {
+  color: var(--grey);
+ }
+
+ .my-form label {
+  color: #ffffff;
+  padding-bottom: 10px;
+  font-size: 1rem;
 }
+
+ .email, .password, .password-confirm {
+     min-width: 100%;
+}
+
+.name {
+  width: 100%;
+}
+
+.create-account-btn {
+  width: 100%;
+  font-size: 1rem;
+  padding: 15px;
+  color: var(--blue);
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 15px;
+}
+
+.btn-container {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.create-account-btn:hover {
+    color: #ffffff;
+    background-color: var(--blue);
+    border: 1px solid #ffffff;
+}
+
+.btn-container:last-child {
+  color: var(--grey);
+  text-align: center;
+}
+
+
+#password, #password-confirm {
+  font-size: 1.3rem;
+}
+
+.input-container :last-child {
+  margin-top: 5px;
+  padding-left: 5px;
+  height: 40px;
+  max-height: 40px;
+}
+
+.valid {
+  color: var(--valid)
+}
+
+.invalid {
+  color: var(--invalid)
+}
+
+.required-border {
+border: 1px solid var(--invalid);
+}
+
+.required-border:focus {
+outline: none;
+box-shadow: none;
+border: 1px solid var(--invalid);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
   /* DESKTOP LAYOUT */
 
   @media only screen and (min-width: 700px) {
-
-    html, body {
-        height: 100%;
-        position: relative;
-        overflow: auto;
-      }
     
 
     main {
@@ -58,20 +204,20 @@
         flex-direction: row;
         flex-wrap: wrap;
         width: 100%;
-        height: 100%
+        height: 100%;
     }
 
     /* LEFT HAND HERO SIDE*/
 
     .img-container {
         position: relative;
-        min-width: 40%;
+        width: 40%;
         height: 100%;
         display: flex;
-        flex-wrap: wrap; 
+        flex-direction: row;
         justify-content: center;
         align-items: center;
-        overflow: hidden;
+        padding-bottom: 0;
     }
 
     img {
@@ -79,6 +225,8 @@
         max-width: 500px;
         height: auto;
         width: calc(90%);
+        padding-top: 0;
+        padding-bottom: 0;
     }
 
     .title {
@@ -91,8 +239,7 @@
 
     .link {
         position: absolute;
-        bottom: 0;
-        padding-bottom: 20px;
+        bottom: 30px;
     }
 
     .link a {
@@ -108,6 +255,7 @@
         width: 60%;
         height: 100%;
         background-color: var(--blue);
+        padding-top: 0;
     }
 
     .form-header {
@@ -117,13 +265,15 @@
         margin: auto;
         margin-top: 50px;
         padding-left: 10px;
+        text-align: left;
     }
 
     .my-form {
         display: flex;
+        flex-direction: row;
         justify-content: space-between;
         flex-wrap: wrap;
-        max-width: 700px;
+        width: 700px;
         margin: auto;
         margin-top: 30px;
     }
@@ -173,6 +323,7 @@
     color: var(--blue);
     border-radius: 5px;
     border: none;
+    margin-bottom: 15px;
   }
 
   .btn-container {
@@ -184,6 +335,11 @@
       color: #ffffff;
       background-color: var(--blue);
       border: 1px solid #ffffff;
+  }
+
+  .btn-container:last-child {
+    color: var(--grey);
+    text-align: center;
   }
 
 

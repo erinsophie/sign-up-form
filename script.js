@@ -14,9 +14,6 @@ const lastNameMsg = document.querySelector('.last-name-msg')
 const allInputs = document.querySelectorAll('input')
 
 
-let feedback = false 
-
-
 passwordInput.addEventListener('blur', validationMsg)
 passwordInput.addEventListener('input', aggressiveFeedback)
 passwordInput.addEventListener('input', checkStatus)
@@ -66,6 +63,7 @@ function validatePassword(password) {
 
 
 function validationMsg() {
+    let feedback = false 
     if (validatePassword(passwordInput.value)) {
         feedback = true
         passwordMsg.textContent = "✓"
@@ -83,6 +81,7 @@ function validationMsg() {
 // EMAIL FEEDBACK
 
 function validateEmail() {
+    let feedback = false 
     let validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
     if (validEmail.test(emailInput.value)) {
@@ -101,6 +100,7 @@ function validateEmail() {
 // REQUIRE NAME FIELDS 
 
 function validateName(e) {
+    let feedback = false 
     if(e.target.value !== '' && e.target.id === 'first-name') {
         feedback = true
         firstNameMsg.textContent = "✓"
@@ -119,13 +119,14 @@ function validateForm() {
         if(allInputs[i].value === '') {
             allInputs[i].classList.add('required-border')
             allInputs[i].addEventListener('input', removeClass)
+            }
         }
     }
+
+    function removeClass() {
+        this.classList.remove('required-border')
 }
 
-function removeClass() {
-    this.classList.remove('required-border')
-}
 
 
 
@@ -134,7 +135,7 @@ function removeClass() {
 function checkStatus(e) {
     if(e.target.value === '') {
        let msg = e.target.nextElementSibling
-       msg.textContent = ""
+       msg.textContent = ''
     }
 }
 
@@ -145,29 +146,9 @@ function aggressiveFeedback() {
         validationMsg()
      } else if (feedback && emailInput.value !== '') {
         validateEmail()
-     } else if (feedback && firstNameInput.value !== '') {
+     } else if (feedback && firstNameInput.value !== '' ||feedback && lastNameInput.value !== '') {
         validateName()
      }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
