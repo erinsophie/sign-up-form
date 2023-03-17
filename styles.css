@@ -48,10 +48,8 @@
 }
 
 img {
-  width: 500px;
-  max-width: 500px;
+  max-width: 100%;
   height: auto;
-  width: calc(90%);
   padding-top: 50px;
   padding-bottom: 40px;
 }
@@ -238,10 +236,9 @@ border: 1px solid var(--invalid);
     }
 
     img {
-        width: 500px;
-        max-width: 500px;
+        width: 520px;
+        max-width: 100%;
         height: auto;
-        width: calc(90%);
         padding-top: 0;
         padding-bottom: 0;
     }
