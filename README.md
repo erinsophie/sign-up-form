@@ -3,8 +3,6 @@
 ## [Live Demo](https://erinsophie.github.io/sign-up-form/)
 
 ![Sign Up Form](images/signup.png)
-![Sign Up Form](images/phone1.png)
-![Sign Up Form](images/phone2.png)
 
 # Technologies Used 
 
