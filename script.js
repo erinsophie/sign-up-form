@@ -9,7 +9,6 @@ const firstNameInput = document.querySelector("#first-name");
 const firstNameMsg = document.querySelector(".first-name-msg");
 const lastNameInput = document.querySelector("#last-name");
 const lastNameMsg = document.querySelector(".last-name-msg");
-const allInputs = document.querySelectorAll("input");
 
 passwordInput.addEventListener("blur", validationMsg);
 passwordInput.addEventListener("input", aggressiveFeedback);
@@ -23,11 +22,11 @@ emailInput.addEventListener("blur", validateEmail);
 emailInput.addEventListener("input", aggressiveFeedback);
 emailInput.addEventListener("input", checkStatus);
 
-firstNameInput.addEventListener("blur", validateName);
+firstNameInput.addEventListener("blur", validateFirstName);
 firstNameInput.addEventListener("input", aggressiveFeedback);
 firstNameInput.addEventListener("input", checkStatus);
 
-lastNameInput.addEventListener("blur", validateName);
+lastNameInput.addEventListener("blur", validateLastName);
 lastNameInput.addEventListener("input", aggressiveFeedback);
 lastNameInput.addEventListener("input", checkStatus);
 
@@ -57,7 +56,7 @@ function matchPasswords() {
     confirmMsg.textContent = "Passwords match ✓";
     valid = true;
     updateValidClass(confirmMsg);
-    // if passwords dont match and both fields are not empty
+    // if passwords dont match and both fields are filled
   } else if (
     confirmInput.value !== passwordInput.value &&
     confirmInput.value !== "" &&
@@ -108,11 +107,15 @@ function validateEmail() {
 }
 
 // require name fields
-function validateName(e) {
-  if (e.target.value !== "" && e.target.id === "first-name") {
+function validateFirstName() {
+  if (firstNameInput.value !== "") {
     firstNameMsg.textContent = "✓";
     firstNameMsg.classList.add("valid");
-  } else if (e.target.value !== "" && e.target.id === "last-name") {
+  }
+}
+
+function validateLastName() {
+  if (lastNameInput.value !== "") {
     lastNameMsg.textContent = "✓";
     lastNameMsg.classList.add("valid");
   }
@@ -121,6 +124,8 @@ function validateName(e) {
 // display red border on empty fields when submit button is clicked
 function validateForm(event) {
   event.preventDefault();
+  const allInputs = document.querySelectorAll("input");
+
   for (let i = 0; i < allInputs.length; i++) {
     if (allInputs[i].value === "") {
       allInputs[i].classList.add("required-border");
@@ -137,6 +142,7 @@ function removeClass() {
 // shake required fields when empty
 function shake(event) {
   event.preventDefault();
+  const allInputs = document.querySelectorAll("input");
   allInputs.forEach((input) => {
     if (input.classList.contains("required-border")) {
       input.classList.add("shake");
@@ -155,26 +161,28 @@ function checkStatus(e) {
   }
 }
 
-// display message only when user clicks away from filled field
-// but when user clicks back into field, update in real time
+function hasBeenFilledInBefore(msg) {
+  if (msg.classList.contains("valid") || msg.classList.contains("invalid")) {
+    return true;
+  }
+}
+
+// display message only when user clicks away from filled field the first time
+// but when user clicks back into field, update message in real time
 function aggressiveFeedback() {
   const input = this;
   const inputId = input.getAttribute("id");
   const msg = document.querySelector(`.${inputId}-msg`);
-  const feedback =
-    msg.classList.contains("valid") || msg.classList.contains("invalid");
-  console.log(feedback);
 
-  if (feedback) {
-    if (inputId === "password" && feedback) {
+  if (hasBeenFilledInBefore(msg)) {
+    if (inputId === "password") {
       validationMsg();
-    } else if (inputId === "email" && feedback) {
+    } else if (inputId === "email") {
       validateEmail();
-    } else if (
-      (inputId === "first-name" || inputId === "last-name") &&
-      feedback
-    ) {
-      validateName();
+    } else if (inputId === "first-name") {
+      validateFirstName();
+    } else if (inputId === "last-name") {
+      validateLastName();
     }
   }
 }
