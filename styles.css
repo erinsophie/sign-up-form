@@ -1,31 +1,32 @@
-/* CSS RESET */
+/* css reset*/
 
 :root {
-    --blue: #0045A9;
-    --grey: #C6C6C6;
-    --valid: #1ADA00;
-    --invalid: #FF1C1C;
+  --blue: #0045a9;
+  --grey: #c6c6c6;
+  --valid: #1ada00;
+  --invalid: #ff1c1c;
 }
 
-*, *::before, *::after {
-    box-sizing: border-box;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 * {
-    margin: 0;
-    padding: 0;
-    font-family: 'Urbanist', sans-serif;
-  }
+  margin: 0;
+  padding: 0;
+  font-family: "Urbanist", sans-serif;
+}
 
-  html, body {
-    height: 100%;
-    position: relative;
-    overflow: auto;
-  }
+html,
+body {
+  height: 100%;
+  position: relative;
+  overflow: auto;
+}
 
-
-
-/* MOBILE LAYOUT */
+/* mobile layout */
 
 .title {
   color: var(--blue);
@@ -83,7 +84,6 @@ img {
   width: 400px;
   margin: auto;
   margin-top: 50px;
-
 }
 
 .input-container {
@@ -92,26 +92,28 @@ img {
 }
 
 input {
-height: 35px;
-color: var(--grey);
-border: 1px solid var(--grey);
-padding-left: 10px;
-border-radius: 5px;
-background-color: transparent;
+  height: 35px;
+  color: var(--grey);
+  border: 1px solid var(--grey);
+  padding-left: 10px;
+  border-radius: 5px;
+  background-color: transparent;
 }
 
 ::placeholder {
   color: var(--grey);
- }
+}
 
- .my-form label {
+.my-form label {
   color: #ffffff;
   padding-bottom: 10px;
   font-size: 1rem;
 }
 
- .email, .password, .password-confirm {
-     min-width: 100%;
+.email,
+.password,
+.password-confirm {
+  min-width: 100%;
 }
 
 .name {
@@ -134,9 +136,9 @@ background-color: transparent;
 }
 
 .create-account-btn:hover {
-    color: #ffffff;
-    background-color: var(--blue);
-    border: 1px solid #ffffff;
+  color: #ffffff;
+  background-color: var(--blue);
+  border: 1px solid #ffffff;
 }
 
 .btn-container:last-child {
@@ -144,8 +146,8 @@ background-color: transparent;
   text-align: center;
 }
 
-
-#password, #password-confirm {
+#password,
+#password-confirm {
   font-size: 1.3rem;
 }
 
@@ -157,177 +159,168 @@ background-color: transparent;
 }
 
 .valid {
-  color: var(--valid)
+  color: var(--valid);
 }
 
 .invalid {
-  color: var(--invalid)
+  color: var(--invalid);
 }
 
 .required-border {
-border: 1px solid var(--invalid);
+  border: 1px solid var(--invalid);
 }
 
 .required-border:focus {
-outline: none;
-box-shadow: none;
-border: 1px solid var(--invalid);
+  outline: none;
+  box-shadow: none;
+  border: 1px solid var(--invalid);
 }
 
-
 .shake {
-  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   perspective: 1000px;
 }
 
 @keyframes shake {
-  10%, 90% {
+  10%,
+  90% {
     transform: translate3d(-1px, 0, 0);
   }
-  
-  20%, 80% {
+
+  20%,
+  80% {
     transform: translate3d(2px, 0, 0);
   }
 
-  30%, 50%, 70% {
+  30%,
+  50%,
+  70% {
     transform: translate3d(-4px, 0, 0);
   }
 
-  40%, 60% {
+  40%,
+  60% {
     transform: translate3d(4px, 0, 0);
   }
 }
 
+/* DESKTOP LAYOUT */
 
+@media only screen and (min-width: 700px) {
+  main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+  }
 
+  /* LEFT HAND HERO SIDE*/
 
+  .img-container {
+    position: relative;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 0;
+  }
 
+  img {
+    width: 520px;
+    max-width: 100%;
+    height: auto;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 
+  .title {
+    color: var(--blue);
+    position: absolute;
+    top: 20px;
+    left: 18px;
+    font-size: 1.9rem;
+  }
 
+  .link {
+    position: absolute;
+    bottom: 30px;
+  }
 
+  .link a {
+    color: var(--blue);
+    text-decoration: none;
+  }
 
-  /* DESKTOP LAYOUT */
+  /* FORM ELEMENTS */
 
-  @media only screen and (min-width: 700px) {
-    
+  .form-container {
+    width: 60%;
+    height: 100%;
+    background-color: var(--blue);
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 
-    main {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        width: 100%;
-        height: 100%;
-    }
+  .form-header {
+    font-size: 2.2rem;
+    color: #ffffff;
+    width: 700px;
+    margin: auto;
+    margin-top: 50px;
+    padding-left: 10px;
+    text-align: left;
+  }
 
-    /* LEFT HAND HERO SIDE*/
+  .my-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 700px;
+    margin: auto;
+    margin-top: 30px;
+  }
 
-    .img-container {
-        position: relative;
-        width: 40%;
-        height: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        padding-bottom: 0;
-    }
+  .input-container {
+    display: flex;
+    flex-direction: column;
+  }
 
-    img {
-        width: 520px;
-        max-width: 100%;
-        height: auto;
-        padding-top: 0;
-        padding-bottom: 0;
-    }
-
-    .title {
-        color: var(--blue);
-        position: absolute;
-        top: 20px;
-        left: 18px;
-        font-size: 1.9rem;
-    }
-
-    .link {
-        position: absolute;
-        bottom: 30px;
-    }
-
-    .link a {
-       color: var(--blue);
-       text-decoration: none;    
-    }
-   
-
-
-    /* FORM ELEMENTS */
-
-
-    .form-container {
-        width: 60%;
-        height: 100%;
-        background-color: var(--blue);
-        padding-top: 0;
-        padding-bottom: 0;
-    }
-
-    .form-header {
-        font-size: 2.2rem;
-        color: #ffffff;
-        width: 700px;
-        margin: auto;
-        margin-top: 50px;
-        padding-left: 10px;
-        text-align: left;
-    }
-
-    .my-form {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        width: 700px;
-        margin: auto;
-        margin-top: 30px;
-    }
-
-   .input-container {
-      display: flex;
-      flex-direction: column;
-   }
-
-   input {
+  input {
     height: 35px;
     color: var(--grey);
     border: 1px solid var(--grey);
     padding-left: 10px;
     border-radius: 5px;
     background-color: transparent;
-   }
+  }
 
-   ::placeholder {
+  ::placeholder {
     color: var(--grey);
-   }
+  }
 
-   .my-form label {
+  .my-form label {
     color: #ffffff;
     padding-bottom: 10px;
     font-size: 1rem;
-}
+  }
 
-   .email, .password, .password-confirm {
-       min-width: 100%;
+  .email,
+  .password,
+  .password-confirm {
+    min-width: 100%;
   }
 
   .name {
     width: 48%;
   }
 
-
   /* BUTTON */
-
 
   .create-account-btn {
     width: 100%;
@@ -345,9 +338,9 @@ border: 1px solid var(--invalid);
   }
 
   .create-account-btn:hover {
-      color: #ffffff;
-      background-color: var(--blue);
-      border: 1px solid #ffffff;
+    color: #ffffff;
+    background-color: var(--blue);
+    border: 1px solid #ffffff;
   }
 
   .btn-container:last-child {
@@ -355,11 +348,10 @@ border: 1px solid var(--invalid);
     text-align: center;
   }
 
-
   /*VALIDATION*/
 
-
-  #password, #password-confirm {
+  #password,
+  #password-confirm {
     font-size: 1.3rem;
   }
 
@@ -371,51 +363,52 @@ border: 1px solid var(--invalid);
   }
 
   .valid {
-    color: var(--valid)
+    color: var(--valid);
   }
 
   .invalid {
-    color: var(--invalid)
-  }
-  
- .required-border {
-  border: 1px solid var(--invalid);
-}
-
-.required-border:focus {
-  outline: none;
-  box-shadow: none;
-  border: 1px solid var(--invalid);
-}
-
-
-/* SHAKE WHEN REQUIRED FIELD IS NOT FILLED IN */
-
-
-.shake {
-  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  perspective: 1000px;
-}
-
-@keyframes shake {
-  10%, 90% {
-    transform: translate3d(-1px, 0, 0);
-  }
-  
-  20%, 80% {
-    transform: translate3d(2px, 0, 0);
+    color: var(--invalid);
   }
 
-  30%, 50%, 70% {
-    transform: translate3d(-4px, 0, 0);
+  .required-border {
+    border: 1px solid var(--invalid);
   }
 
-  40%, 60% {
-    transform: translate3d(4px, 0, 0);
+  .required-border:focus {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid var(--invalid);
+  }
+
+  /* SHAKE WHEN REQUIRED FIELD IS NOT FILLED IN */
+
+  .shake {
+    animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  @keyframes shake {
+    10%,
+    90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+      transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+      transform: translate3d(4px, 0, 0);
+    }
   }
 }
-
-}
-

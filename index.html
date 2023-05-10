@@ -1,71 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Urbanist&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
     <title>Sign-Up Form</title>
-</head>
-<body>
+  </head>
+  <body>
     <main>
-        <div class="img-container">
-            <h1 class="title">YourWebsite</h1>
-            <img src="images/login.svg" alt="login illustration">
-            <div class="link">
-                <a href="https://storyset.com/user" target="blank">User illustrations by Storyset
-                </a>
-                <p>Made by: 
-                  <a href="https://github.com/erinsophie" target="_blank">erinsophie</a> | 
-                  <a href="https://github.com/erinsophie/sign-up-form" target="_blank">Source</a>
-                </p>
-            </div>
+      <div class="img-container">
+        <h1 class="title">YourWebsite</h1>
+        <img src="images/login.svg" alt="login illustration" />
+        <div class="link">
+          <a href="https://storyset.com/user" target="blank"
+            >User illustrations by Storyset
+          </a>
+          <p>
+            Made by:
+            <a href="https://github.com/erinsophie" target="_blank"
+              >erinsophie</a
+            >
+            |
+            <a href="https://github.com/erinsophie/sign-up-form" target="_blank"
+              >Source</a
+            >
+          </p>
         </div>
-        <div class="form-container">
-            <h2 class="form-header">Get started</h2>
-             <form class="my-form" action="" method="get">
+      </div>
+      <div class="form-container">
+        <h2 class="form-header">Get started</h2>
+        <form class="my-form" action="" method="get">
+          <div class="input-container name">
+            <label for="first-name">First Name*</label>
+            <input
+              type="text"
+              id="first-name"
+              name="first-name"
+              placeholder="First Name"
+              required
+            />
+            <div class="first-name-msg"></div>
+          </div>
 
-             <div class="input-container name">
-                  <label for="first-name">First Name*</label>
-                  <input type="text" id="first-name" name="first-name" placeholder="First Name" required/>
-                  <div class="first-name-msg"></div>
-                </div>
+          <div class="input-container name">
+            <label for="last-name">Last Name*</label>
+            <input
+              type="text"
+              id="last-name"
+              name="last-name"
+              placeholder="Last Name"
+              required
+            />
+            <div class="last-name-msg"></div>
+          </div>
 
-                 <div class="input-container name">
-                    <label for="last-name">Last Name*</label>
-                    <input type="text" id="last-name" name="last-name" placeholder="Last Name" required/>
-                    <div class="last-name-msg"></div>
-                  </div>
+          <div class="input-container email">
+            <label for="email">Email*</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="emmajames4@mail.com"
+              required
+            />
+            <div class="email-msg"></div>
+          </div>
 
-                  <div class="input-container email">
-                    <label for="email">Email*</label>
-                    <input type="email" id="email" name="email" placeholder="emmajames4@mail.com" required/>
-                    <div class="email-msg"></div>
-                  </div>
+          <div class="input-container password">
+            <label for="password">Password*</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="**********"
+              minlength="8"
+              maxlength="30"
+              required
+            />
+            <div class="password-msg"></div>
+          </div>
 
-                  <div class="input-container password">
-                    <label for="password">Password*</label>
-                    <input type="password" id="password" name="password" placeholder="**********" minlength="8" maxlength="30" required/>
-                    <div class="password-msg"></div>
-                  </div>
+          <div class="input-container password-confirm">
+            <label for="password-confirm">Confirm Password*</label>
+            <input
+              type="password"
+              id="password-confirm"
+              name="password-confirm"
+              placeholder="**********"
+              minlength="8"
+              maxlength="30"
+              required
+            />
+            <div class="confirm-msg"></div>
+          </div>
 
-                  <div class="input-container password-confirm">
-                    <label for="password-confirm">Confirm Password*</label>
-                    <input type="password" id="password-confirm" name="password-confirm" placeholder="**********" minlength="8" maxlength="30" required/>
-                    <div class="confirm-msg"></div>
-                  </div>
-                  
-                  <div class="btn-container">
-                    <button type="submit" class="create-account-btn">Create Account</button>
-                    <p>Already have an account? LOG IN</p>
-                </div>
-
+          <div class="btn-container">
+            <button type="submit" class="create-account-btn">
+              Create Account
+            </button>
+            <p>Already have an account? LOG IN</p>
+          </div>
         </form>
-       </div>
+      </div>
     </main>
     <script src="script.js"></script>
   </body>
