@@ -12,23 +12,31 @@ const lastNameMsg = document.querySelector(".last-name-msg");
 
 passwordInput.addEventListener("blur", validationMsg);
 passwordInput.addEventListener("input", aggressiveFeedback);
-passwordInput.addEventListener("input", checkStatus);
 passwordInput.addEventListener("input", matchPasswords);
+passwordInput.addEventListener("input", () =>
+  checkStatus(passwordInput, passwordMsg)
+);
 
 confirmInput.addEventListener("input", matchPasswords);
-confirmInput.addEventListener("input", checkStatus);
+confirmInput.addEventListener("input", () =>
+  checkStatus(confirmInput, confirmMsg)
+);
 
 emailInput.addEventListener("blur", validateEmail);
 emailInput.addEventListener("input", aggressiveFeedback);
-emailInput.addEventListener("input", checkStatus);
+emailInput.addEventListener("input", () => checkStatus(emailInput, emailMsg));
 
 firstNameInput.addEventListener("blur", validateFirstName);
 firstNameInput.addEventListener("input", aggressiveFeedback);
-firstNameInput.addEventListener("input", checkStatus);
+firstNameInput.addEventListener("input", () =>
+  checkStatus(firstNameInput, firstNameMsg)
+);
 
 lastNameInput.addEventListener("blur", validateLastName);
 lastNameInput.addEventListener("input", aggressiveFeedback);
-lastNameInput.addEventListener("input", checkStatus);
+lastNameInput.addEventListener("input", () =>
+  checkStatus(lastNameInput, lastNameMsg)
+);
 
 submitBtn.addEventListener("click", validateForm);
 submitBtn.addEventListener("click", shake);
@@ -122,16 +130,17 @@ function validateLastName() {
 }
 
 // display red border on empty fields when submit button is clicked
+// display red border on empty fields when submit button is clicked
 function validateForm(event) {
   event.preventDefault();
   const allInputs = document.querySelectorAll("input");
 
-  for (let i = 0; i < allInputs.length; i++) {
-    if (allInputs[i].value === "") {
-      allInputs[i].classList.add("required-border");
-      allInputs[i].addEventListener("input", removeClass);
+  allInputs.forEach((input) => {
+    if (input.value === "") {
+      input.classList.add("required-border");
+      input.addEventListener("input", removeClass);
     }
-  }
+  });
 }
 
 // remove red border
@@ -143,6 +152,7 @@ function removeClass() {
 function shake(event) {
   event.preventDefault();
   const allInputs = document.querySelectorAll("input");
+  
   allInputs.forEach((input) => {
     if (input.classList.contains("required-border")) {
       input.classList.add("shake");
@@ -154,13 +164,14 @@ function shake(event) {
 }
 
 // do not display message when field is blank and user clicks out of it
-function checkStatus(e) {
-  if (e.target.value === "") {
-    let msg = e.target.nextElementSibling;
-    msg.textContent = "";
+function checkStatus(inputElement, msgElement) {
+  if (inputElement.value === "") {
+    msgElement.textContent = "";
   }
 }
 
+// check if msg has been given the valid or invalid class before
+// if so, it means it has previously recieved input
 function hasBeenFilledInBefore(msg) {
   if (msg.classList.contains("valid") || msg.classList.contains("invalid")) {
     return true;
@@ -169,6 +180,7 @@ function hasBeenFilledInBefore(msg) {
 
 // display message only when user clicks away from filled field the first time
 // but when user clicks back into field, update message in real time
+// triggering aggressiveFeedback
 function aggressiveFeedback() {
   const input = this;
   const inputId = input.getAttribute("id");
