@@ -164,11 +164,11 @@ input {
   font-size: 1.3rem;
 }
 
-.valid {
+.msg.valid {
   color: var(--valid);
 }
 
-.invalid {
+.msg.invalid {
   color: var(--invalid);
 }
 

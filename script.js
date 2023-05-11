@@ -4,11 +4,11 @@ const confirmMsg = document.querySelector(".confirm-msg");
 const passwordMsg = document.querySelector(".password-msg");
 const emailMsg = document.querySelector(".email-msg");
 const emailInput = document.querySelector("#email");
-const submitBtn = document.querySelector(".create-account-btn");
 const firstNameInput = document.querySelector("#first-name");
 const firstNameMsg = document.querySelector(".first-name-msg");
 const lastNameInput = document.querySelector("#last-name");
 const lastNameMsg = document.querySelector(".last-name-msg");
+const submitBtn = document.querySelector(".create-account-btn");
 
 passwordInput.addEventListener("blur", validationMsg);
 passwordInput.addEventListener("input", aggressiveFeedback);
@@ -39,7 +39,6 @@ lastNameInput.addEventListener("input", () =>
 );
 
 submitBtn.addEventListener("click", validateForm);
-submitBtn.addEventListener("click", shake);
 
 let valid;
 
@@ -127,38 +126,30 @@ function validateLastName() {
   }
 }
 
-// display red border on empty fields when submit button is clicked
+// display red border and shake effect on empty fields 
+// when submit button is clicked
 function validateForm(event) {
-  event.preventDefault();
   const allInputs = document.querySelectorAll("input");
 
   allInputs.forEach((input) => {
     if (input.value === "") {
+      event.preventDefault();
       input.classList.add("required-border");
-      input.addEventListener("input", removeBorder);
-    }
-  });
-}
-
-// remove red border
-function removeBorder() {
-  this.classList.remove("required-border");
-}
-
-// shake required fields when empty
-function shake(event) {
-  event.preventDefault();
-  const allInputs = document.querySelectorAll("input");
-
-  allInputs.forEach((input) => {
-    if (input.classList.contains("required-border")) {
       input.classList.add("shake");
+  
+      // when the user starts typing again, remove the red border
+      input.addEventListener("input", () => {
+        input.classList.remove("required-border");
+      });
+
+      // set timeout on the shake event
+      setTimeout(() => {
+        input.classList.remove("shake");
+      }, 600);
     }
-    setTimeout(() => {
-      input.classList.remove("shake");
-    }, 600);
   });
 }
+
 
 // do not display message when field is blank and user clicks out of it
 function checkStatus(inputElement, msgElement) {
@@ -175,9 +166,8 @@ function hasBeenFilledInBefore(msg) {
   }
 }
 
-// display message only when user clicks away from filled field the first time
-// but when user clicks back into field, update message in real time
-// triggering aggressiveFeedback
+
+// trigger aggressive feedback
 function aggressiveFeedback() {
   const input = this;
   const inputId = input.getAttribute("id");
