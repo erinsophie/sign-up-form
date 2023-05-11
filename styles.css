@@ -151,7 +151,7 @@ input {
   font-size: 1.3rem;
 }
 
-.input-container :last-child {
+.msg {
   margin-top: 5px;
   padding-left: 5px;
   height: 40px;

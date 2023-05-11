@@ -101,13 +101,11 @@ function validationMsg() {
 
 // email feedback message
 function validateEmail() {
-  let validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-  if (validEmail.test(emailInput.value)) {
+  if (emailInput.validity.valid) {
     emailMsg.textContent = "✓";
     valid = true;
     updateValidClass(emailMsg);
-  } else if (emailInput.value !== "" && !validEmail.test(emailInput.value)) {
+  } else if (emailInput.value !== "" && !emailInput.validity.valid) {
     emailMsg.textContent = "Please enter a valid email address";
     valid = false;
     updateValidClass(emailMsg);
@@ -130,7 +128,6 @@ function validateLastName() {
 }
 
 // display red border on empty fields when submit button is clicked
-// display red border on empty fields when submit button is clicked
 function validateForm(event) {
   event.preventDefault();
   const allInputs = document.querySelectorAll("input");
@@ -138,13 +135,13 @@ function validateForm(event) {
   allInputs.forEach((input) => {
     if (input.value === "") {
       input.classList.add("required-border");
-      input.addEventListener("input", removeClass);
+      input.addEventListener("input", removeBorder);
     }
   });
 }
 
 // remove red border
-function removeClass() {
+function removeBorder() {
   this.classList.remove("required-border");
 }
 
@@ -152,7 +149,7 @@ function removeClass() {
 function shake(event) {
   event.preventDefault();
   const allInputs = document.querySelectorAll("input");
-  
+
   allInputs.forEach((input) => {
     if (input.classList.contains("required-border")) {
       input.classList.add("shake");
