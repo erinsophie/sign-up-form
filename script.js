@@ -8,37 +8,45 @@ const firstNameInput = document.querySelector("#first-name");
 const firstNameMsg = document.querySelector(".first-name-msg");
 const lastNameInput = document.querySelector("#last-name");
 const lastNameMsg = document.querySelector(".last-name-msg");
-const submitBtn = document.querySelector(".create-account-btn");
 
-passwordInput.addEventListener("blur", validationMsg);
-passwordInput.addEventListener("input", aggressiveFeedback);
-passwordInput.addEventListener("input", matchPasswords);
+//password
+passwordInput.addEventListener("blur", () =>
+  validationMsg(passwordInput, passwordMsg)
+);
+passwordInput.addEventListener("input", () =>
+  matchPasswords(passwordInput, confirmInput, confirmMsg)
+);
 passwordInput.addEventListener("input", () =>
   checkStatus(passwordInput, passwordMsg)
 );
+passwordInput.addEventListener("input", aggressiveFeedback);
 
-confirmInput.addEventListener("input", matchPasswords);
+// confirm password
+confirmInput.addEventListener("input", () =>
+  matchPasswords(passwordInput, confirmInput, confirmMsg)
+);
 confirmInput.addEventListener("input", () =>
   checkStatus(confirmInput, confirmMsg)
 );
 
-emailInput.addEventListener("blur", validateEmail);
-emailInput.addEventListener("input", aggressiveFeedback);
+// email
+emailInput.addEventListener("blur", () => validateEmail(emailInput, emailMsg));
 emailInput.addEventListener("input", () => checkStatus(emailInput, emailMsg));
+emailInput.addEventListener("input", aggressiveFeedback);
 
-firstNameInput.addEventListener("blur", validateFirstName);
-firstNameInput.addEventListener("input", aggressiveFeedback);
+// first name
+firstNameInput.addEventListener("blur", () => validateFirstName(firstNameInput, firstNameMsg));
 firstNameInput.addEventListener("input", () =>
   checkStatus(firstNameInput, firstNameMsg)
 );
+firstNameInput.addEventListener("input", aggressiveFeedback);
 
-lastNameInput.addEventListener("blur", validateLastName);
-lastNameInput.addEventListener("input", aggressiveFeedback);
+// last name
+lastNameInput.addEventListener("blur", () => validateLastName(lastNameInput, lastNameMsg));
 lastNameInput.addEventListener("input", () =>
   checkStatus(lastNameInput, lastNameMsg)
 );
-
-submitBtn.addEventListener("click", validateForm);
+lastNameInput.addEventListener("input", aggressiveFeedback);
 
 let valid;
 
@@ -54,102 +62,100 @@ function updateValidClass(msg) {
 }
 
 // confirm if passwords match
-function matchPasswords() {
+function matchPasswords(password, confirmPassword, msg) {
   // if both passwords match
-  if (
-    confirmInput.value === passwordInput.value &&
-    passwordInput.value !== ""
-  ) {
-    confirmMsg.textContent = "Passwords match ✓";
+  if (confirmPassword.value === password.value && password.value !== "") {
+    msg.textContent = "Passwords match ✓";
     valid = true;
-    updateValidClass(confirmMsg);
+    updateValidClass(msg);
     // if passwords dont match and both fields are filled
   } else if (
-    confirmInput.value !== passwordInput.value &&
-    confirmInput.value !== "" &&
-    passwordInput.value !== ""
+    confirmPassword.value !== password.value &&
+    confirmPassword.value !== "" &&
+    password.value !== ""
   ) {
-    confirmMsg.textContent = "Passwords do not match";
+    msg.textContent = "Passwords do not match";
     valid = false;
-    updateValidClass(confirmMsg);
+    updateValidClass(msg);
   }
 }
 
-// confirm if password matches pattern
-function validatePassword(password) {
-  const regex = /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9]).{8,}$/;
-  return regex.test(password);
-}
-
 // password feeback message
-function validationMsg() {
-  if (validatePassword(passwordInput.value)) {
-    passwordMsg.textContent = "✓";
+function validationMsg(password, msg) {
+  // use setCustomValidity to define the custom validation
+  const regex = /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9]).{8,}$/;
+  if (!regex.test(passwordInput.value)) {
+    password.setCustomValidity("Invalid");
+  } else {
+    password.setCustomValidity("");
+  }
+
+  if (password.validity.valid) {
+    msg.textContent = "✓";
     valid = true;
-    updateValidClass(passwordMsg);
-  } else if (
-    passwordInput.value !== "" &&
-    !validatePassword(passwordInput.value)
-  ) {
-    passwordMsg.textContent =
+    updateValidClass(msg);
+  } else if (password.value !== "" && !password.validity.valid) {
+    msg.textContent =
       "Password must be atleast 8 characters long, contain 1 uppercase letter, 1 number and 1 special character";
     valid = false;
-    updateValidClass(passwordMsg);
+    updateValidClass(msg);
   }
 }
 
 // email feedback message
-function validateEmail() {
-  if (emailInput.validity.valid) {
-    emailMsg.textContent = "✓";
+function validateEmail(email, msg) {
+  if (email.validity.valid) {
+    msg.textContent = "✓";
     valid = true;
-    updateValidClass(emailMsg);
-  } else if (emailInput.value !== "" && !emailInput.validity.valid) {
-    emailMsg.textContent = "Please enter a valid email address";
+    updateValidClass(msg);
+  } else if (email.value !== "" && !email.validity.valid) {
+    msg.textContent = "Please enter a valid email address";
     valid = false;
-    updateValidClass(emailMsg);
+    updateValidClass(msg);
   }
 }
 
 // require name fields
-function validateFirstName() {
-  if (firstNameInput.value !== "") {
-    firstNameMsg.textContent = "✓";
-    firstNameMsg.classList.add("valid");
+function validateFirstName(name, msg) {
+  if (name.value !== "") {
+    msg.textContent = "✓";
+    msg.classList.add("valid");
   }
 }
 
-function validateLastName() {
-  if (lastNameInput.value !== "") {
-    lastNameMsg.textContent = "✓";
-    lastNameMsg.classList.add("valid");
+function validateLastName(name, msg) {
+  if (name.value !== "") {
+    msg.textContent = "✓";
+    msg.classList.add("valid");
   }
 }
 
-// display red border and shake effect on empty fields 
+// display red border and shake effect on empty fields
 // when submit button is clicked
-function validateForm(event) {
+const form = document.querySelector("form");
+
+form.addEventListener("submit", (event) => {
   const allInputs = document.querySelectorAll("input");
+  if (!form.checkValidity()) {
+    event.preventDefault();
+    allInputs.forEach((input) => {
+      if (input.value === "") {
+        input.classList.add("required-border");
+        input.classList.add("shake");
 
-  allInputs.forEach((input) => {
-    if (input.value === "") {
-      event.preventDefault();
-      input.classList.add("required-border");
-      input.classList.add("shake");
-  
-      // when the user starts typing again, remove the red border
-      input.addEventListener("input", () => {
-        input.classList.remove("required-border");
-      });
+        // when the user starts typing again, remove the red border
+        input.addEventListener("input", () => {
+          input.classList.remove("required-border");
+        });
 
-      // set timeout on the shake event
-      setTimeout(() => {
-        input.classList.remove("shake");
-      }, 600);
-    }
-  });
-}
-
+        // set timeout on the shake class
+        setTimeout(() => {
+          input.classList.remove("shake");
+        }, 600);
+      }
+    });
+  }
+});
 
 // do not display message when field is blank and user clicks out of it
 function checkStatus(inputElement, msgElement) {
@@ -166,7 +172,6 @@ function hasBeenFilledInBefore(msg) {
   }
 }
 
-
 // trigger aggressive feedback
 function aggressiveFeedback() {
   const input = this;
@@ -175,13 +180,13 @@ function aggressiveFeedback() {
 
   if (hasBeenFilledInBefore(msg)) {
     if (inputId === "password") {
-      validationMsg();
+      validationMsg(passwordInput, passwordMsg);
     } else if (inputId === "email") {
-      validateEmail();
+      validateEmail(emailInput, emailMsg);
     } else if (inputId === "first-name") {
-      validateFirstName();
+      validateFirstName(firstNameInput, firstNameMsg);
     } else if (inputId === "last-name") {
-      validateLastName();
+      validateLastName(lastNameInput, lastNameMsg);
     }
   }
 }
