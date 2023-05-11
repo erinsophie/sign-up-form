@@ -23,10 +23,15 @@ html,
 body {
   height: 100%;
   position: relative;
-  overflow: auto;
 }
 
 /* mobile layout */
+
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 
 .title {
   color: var(--blue);
@@ -66,8 +71,8 @@ img {
 
 .form-container {
   padding-top: 60px;
-  background-color: var(--blue);
   padding-bottom: 50px;
+  background-color: var(--blue);
 }
 
 .form-header {
@@ -76,14 +81,6 @@ img {
   width: 400px;
   margin: auto;
   text-align: center;
-}
-
-.my-form {
-  display: flex;
-  flex-direction: column;
-  width: 400px;
-  margin: auto;
-  margin-top: 50px;
 }
 
 .input-container {
@@ -98,6 +95,22 @@ input {
   padding-left: 10px;
   border-radius: 5px;
   background-color: transparent;
+}
+
+.my-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 400px;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.msg {
+  margin-top: 5px;
+  padding-left: 5px;
+  height: 40px;
+  max-height: 40px;
 }
 
 ::placeholder {
@@ -151,13 +164,6 @@ input {
   font-size: 1.3rem;
 }
 
-.msg {
-  margin-top: 5px;
-  padding-left: 5px;
-  height: 40px;
-  max-height: 40px;
-}
-
 .valid {
   color: var(--valid);
 }
@@ -167,12 +173,6 @@ input {
 }
 
 .required-border {
-  border: 1px solid var(--invalid);
-}
-
-.required-border:focus {
-  outline: none;
-  box-shadow: none;
   border: 1px solid var(--invalid);
 }
 
@@ -206,24 +206,15 @@ input {
   }
 }
 
-/* DESKTOP LAYOUT */
+/* desktop layout */
 
-@media only screen and (min-width: 700px) {
+@media (min-width: 700px) {
   main {
-    display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-    height: 100%;
   }
 
-  /* LEFT HAND HERO SIDE*/
-
   .img-container {
-    position: relative;
     width: 40%;
-    height: 100%;
-    display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -232,183 +223,41 @@ input {
 
   img {
     width: 520px;
-    max-width: 100%;
-    height: auto;
     padding-top: 0;
     padding-bottom: 0;
   }
 
-  .title {
-    color: var(--blue);
-    position: absolute;
-    top: 20px;
-    left: 18px;
-    font-size: 1.9rem;
-  }
-
   .link {
-    position: absolute;
     bottom: 30px;
   }
 
-  .link a {
-    color: var(--blue);
-    text-decoration: none;
-  }
-
-  /* FORM ELEMENTS */
+  /* form elements */
 
   .form-container {
     width: 60%;
-    height: 100%;
-    background-color: var(--blue);
     padding-top: 0;
     padding-bottom: 0;
   }
 
   .form-header {
     font-size: 2.2rem;
-    color: #ffffff;
     width: 700px;
-    margin: auto;
     margin-top: 50px;
     padding-left: 10px;
     text-align: left;
   }
 
   .my-form {
-    display: flex;
     flex-direction: row;
-    justify-content: space-between;
     flex-wrap: wrap;
     width: 700px;
-    margin: auto;
-    margin-top: 30px;
-  }
-
-  .input-container {
-    display: flex;
-    flex-direction: column;
-  }
-
-  input {
-    height: 35px;
-    color: var(--grey);
-    border: 1px solid var(--grey);
-    padding-left: 10px;
-    border-radius: 5px;
-    background-color: transparent;
-  }
-
-  ::placeholder {
-    color: var(--grey);
-  }
-
-  .my-form label {
-    color: #ffffff;
-    padding-bottom: 10px;
-    font-size: 1rem;
-  }
-
-  .email,
-  .password,
-  .password-confirm {
-    min-width: 100%;
   }
 
   .name {
     width: 48%;
   }
 
-  /* BUTTON */
-
-  .create-account-btn {
-    width: 100%;
-    font-size: 1rem;
-    padding: 15px;
-    color: var(--blue);
-    border-radius: 5px;
-    border: 1px solid #ffffff;
-    margin-bottom: 15px;
-  }
-
   .btn-container {
-    width: 100%;
     margin-top: 10px;
-  }
-
-  .create-account-btn:hover {
-    color: #ffffff;
-    background-color: var(--blue);
-    border: 1px solid #ffffff;
-  }
-
-  .btn-container:last-child {
-    color: var(--grey);
-    text-align: center;
-  }
-
-  /*VALIDATION*/
-
-  #password,
-  #password-confirm {
-    font-size: 1.3rem;
-  }
-
-  .input-container :last-child {
-    margin-top: 5px;
-    padding-left: 5px;
-    height: 40px;
-    max-height: 40px;
-  }
-
-  .valid {
-    color: var(--valid);
-  }
-
-  .invalid {
-    color: var(--invalid);
-  }
-
-  .required-border {
-    border: 1px solid var(--invalid);
-  }
-
-  .required-border:focus {
-    outline: none;
-    box-shadow: none;
-    border: 1px solid var(--invalid);
-  }
-
-  /* SHAKE WHEN REQUIRED FIELD IS NOT FILLED IN */
-
-  .shake {
-    animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-    transform: translate3d(0, 0, 0);
-    backface-visibility: hidden;
-    perspective: 1000px;
-  }
-
-  @keyframes shake {
-    10%,
-    90% {
-      transform: translate3d(-1px, 0, 0);
-    }
-
-    20%,
-    80% {
-      transform: translate3d(2px, 0, 0);
-    }
-
-    30%,
-    50%,
-    70% {
-      transform: translate3d(-4px, 0, 0);
-    }
-
-    40%,
-    60% {
-      transform: translate3d(4px, 0, 0);
-    }
   }
 }
