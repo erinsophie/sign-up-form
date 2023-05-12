@@ -1,57 +1,63 @@
-const passwordInput = document.querySelector("#password");
-const confirmInput = document.querySelector("#password-confirm");
-const confirmMsg = document.querySelector(".confirm-msg");
-const passwordMsg = document.querySelector(".password-msg");
-const emailMsg = document.querySelector(".email-msg");
-const emailInput = document.querySelector("#email");
-const firstNameInput = document.querySelector("#first-name");
-const firstNameMsg = document.querySelector(".first-name-msg");
-const lastNameInput = document.querySelector("#last-name");
-const lastNameMsg = document.querySelector(".last-name-msg");
+const inputElements = document.querySelectorAll("input");
 
-//password
-passwordInput.addEventListener("blur", () =>
-  validationMsg(passwordInput, passwordMsg)
-);
-passwordInput.addEventListener("input", () =>
-  matchPasswords(passwordInput, confirmInput, confirmMsg)
-);
-passwordInput.addEventListener("input", () =>
-  checkStatus(passwordInput, passwordMsg)
-);
-passwordInput.addEventListener("input", aggressiveFeedback);
+inputElements.forEach((input) => {
+  const inputId = input.getAttribute("id");
+  const msg = document.querySelector(`.${inputId}-msg`);
 
-// confirm password
-confirmInput.addEventListener("input", () =>
-  matchPasswords(passwordInput, confirmInput, confirmMsg)
-);
-confirmInput.addEventListener("input", () =>
-  checkStatus(confirmInput, confirmMsg)
-);
+  // call message feeback on blur
+  input.addEventListener("blur", () => validateInput(input, msg));
 
-// email
-emailInput.addEventListener("blur", () => validateEmail(emailInput, emailMsg));
-emailInput.addEventListener("input", () => checkStatus(emailInput, emailMsg));
-emailInput.addEventListener("input", aggressiveFeedback);
+  // trigger aggressive validation if input has been filled in before
+  input.addEventListener("input", () => {
+    if (hasBeenFilledInBefore(msg)) {
+      validateInput(input, msg);
+    }
+  });
 
-// first name
-firstNameInput.addEventListener("blur", () => validateFirstName(firstNameInput, firstNameMsg));
-firstNameInput.addEventListener("input", () =>
-  checkStatus(firstNameInput, firstNameMsg)
-);
-firstNameInput.addEventListener("input", aggressiveFeedback);
+  // triggers live password confirmation
+  input.addEventListener("input", () => {
+    if (inputId === "password" || inputId === "password-confirm") {
+      matchPasswords();
+    }
+  });
+});
 
-// last name
-lastNameInput.addEventListener("blur", () => validateLastName(lastNameInput, lastNameMsg));
-lastNameInput.addEventListener("input", () =>
-  checkStatus(lastNameInput, lastNameMsg)
-);
-lastNameInput.addEventListener("input", aggressiveFeedback);
+// validates all inputs
+function validateInput(input, msg) {
+  let valid = false;
+  let text = "";
 
-let valid;
+  if (input.id === "password") {
+    valid = validatePassword(input);
+    text = valid
+      ? "✓"
+      : "Password must be atleast 8 characters long, contain 1 uppercase letter, 1 number and 1 special character";
+  } else if (input.id === "email") {
+    valid = input.validity.valid;
+    text = valid ? "✓" : "Please enter a valid email address";
+  } else if (input.id === "first-name" || input.id === "last-name") {
+    valid = input.value !== "";
+    text = valid ? "✓" : "";
+  }
+
+  if (input.value !== "") {
+    msg.textContent = text;
+    updateValidClass(msg, valid);
+  }
+
+  if (input.value === "") {
+    msg.textContent = "";
+  }
+}
+
+// validate password
+function validatePassword(password) {
+  const regex = /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9]).{8,}$/;
+  return regex.test(password.value);
+}
 
 // toggle class
-function updateValidClass(msg) {
+function updateValidClass(msg, valid) {
   if (valid) {
     msg.classList.add("valid");
     msg.classList.remove("invalid");
@@ -61,72 +67,31 @@ function updateValidClass(msg) {
   }
 }
 
-// confirm if passwords match
-function matchPasswords(password, confirmPassword, msg) {
+// only controls the confirm password message
+function matchPasswords() {
+  const passwordInput = document.getElementById("password");
+  const confirmInput = document.getElementById("password-confirm");
+  const confirmMsg = document.querySelector(".confirm-msg");
+
   // if both passwords match
-  if (confirmPassword.value === password.value && password.value !== "") {
-    msg.textContent = "Passwords match ✓";
-    valid = true;
-    updateValidClass(msg);
+  if (
+    confirmInput.value === passwordInput.value &&
+    passwordInput.value !== ""
+  ) {
+    confirmMsg.textContent = "Passwords match ✓";
+    updateValidClass(confirmMsg, true);
+
     // if passwords dont match and both fields are filled
   } else if (
-    confirmPassword.value !== password.value &&
-    confirmPassword.value !== "" &&
-    password.value !== ""
+    confirmInput.value !== passwordInput.value &&
+    confirmInput.value !== "" &&
+    passwordInput.value !== ""
   ) {
-    msg.textContent = "Passwords do not match";
-    valid = false;
-    updateValidClass(msg);
-  }
-}
+    confirmMsg.textContent = "Passwords do not match";
+    updateValidClass(confirmMsg, false);
 
-// password feeback message
-function validationMsg(password, msg) {
-  // use setCustomValidity to define the custom validation
-  const regex = /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9]).{8,}$/;
-  if (!regex.test(passwordInput.value)) {
-    password.setCustomValidity("Invalid");
-  } else {
-    password.setCustomValidity("");
-  }
-
-  if (password.validity.valid) {
-    msg.textContent = "✓";
-    valid = true;
-    updateValidClass(msg);
-  } else if (password.value !== "" && !password.validity.valid) {
-    msg.textContent =
-      "Password must be atleast 8 characters long, contain 1 uppercase letter, 1 number and 1 special character";
-    valid = false;
-    updateValidClass(msg);
-  }
-}
-
-// email feedback message
-function validateEmail(email, msg) {
-  if (email.validity.valid) {
-    msg.textContent = "✓";
-    valid = true;
-    updateValidClass(msg);
-  } else if (email.value !== "" && !email.validity.valid) {
-    msg.textContent = "Please enter a valid email address";
-    valid = false;
-    updateValidClass(msg);
-  }
-}
-
-// require name fields
-function validateFirstName(name, msg) {
-  if (name.value !== "") {
-    msg.textContent = "✓";
-    msg.classList.add("valid");
-  }
-}
-
-function validateLastName(name, msg) {
-  if (name.value !== "") {
-    msg.textContent = "✓";
-    msg.classList.add("valid");
+  } else if (confirmInput.value === "" || passwordInput.value === "") {
+    confirmMsg.textContent = "";
   }
 }
 
@@ -135,10 +100,9 @@ function validateLastName(name, msg) {
 const form = document.querySelector("form");
 
 form.addEventListener("submit", (event) => {
-  const allInputs = document.querySelectorAll("input");
   if (!form.checkValidity()) {
     event.preventDefault();
-    allInputs.forEach((input) => {
+    inputElements.forEach((input) => {
       if (input.value === "") {
         input.classList.add("required-border");
         input.classList.add("shake");
@@ -157,36 +121,10 @@ form.addEventListener("submit", (event) => {
   }
 });
 
-// do not display message when field is blank and user clicks out of it
-function checkStatus(inputElement, msgElement) {
-  if (inputElement.value === "") {
-    msgElement.textContent = "";
-  }
-}
-
 // check if msg has been given the valid or invalid class before
-// if so, it means it has previously recieved input
+// if so, it means it has previously recieved an input
 function hasBeenFilledInBefore(msg) {
   if (msg.classList.contains("valid") || msg.classList.contains("invalid")) {
     return true;
-  }
-}
-
-// trigger aggressive feedback
-function aggressiveFeedback() {
-  const input = this;
-  const inputId = input.getAttribute("id");
-  const msg = document.querySelector(`.${inputId}-msg`);
-
-  if (hasBeenFilledInBefore(msg)) {
-    if (inputId === "password") {
-      validationMsg(passwordInput, passwordMsg);
-    } else if (inputId === "email") {
-      validateEmail(emailInput, emailMsg);
-    } else if (inputId === "first-name") {
-      validateFirstName(firstNameInput, firstNameMsg);
-    } else if (inputId === "last-name") {
-      validateLastName(lastNameInput, lastNameMsg);
-    }
   }
 }
